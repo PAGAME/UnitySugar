@@ -178,10 +178,14 @@ parseLine = (src) ->
 	return all
 
 
-root = parseLine(data)
+# root = parseLine(data)
 
-# console.log root.content[2].content[0]
-# console.log root.toString()
-console.log root.toCS()
+# console.log root.toCS()
 
-fs.writeFileSync('aim.cs', root.toCS())
+# fs.writeFileSync('aim.cs', root.toCS())
+# 
+
+t = """
+	("sdf\"sdf", "abcdefg, "asdfsdffs, 1234)
+"""
+console.log t.replace(/"(\w+)\s*/g, "\"$1\"")
