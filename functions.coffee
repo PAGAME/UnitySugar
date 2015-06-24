@@ -3,6 +3,9 @@ fs = require 'fs'
 String::Trim = () ->
 	return @replace(/(^\s*)|(\s*$)/g, "")
 
+String::TrimRight = () ->
+	return @replace(/(\s*$)/g, "")
+
 data = fs.readFileSync('source.txt').toString()
 data = data.replace(/\r\n/g, '\n')
 
@@ -47,7 +50,6 @@ parseStp = (src) ->
 		console.log src
 		return error
 
-datat = fs.readFileSync('gq.strip', 'UTF-8').toString()
 # datat = datat.replace(/\r\n/g, '\n')
 # lines = datat.split('\n')
 # lines = (t for t in lines when t isnt '')
@@ -72,30 +74,114 @@ parseOneLine = (line) ->
 			.split(' ')
 	return (t for t in result when t isnt '')
 
+# parseLine(data)
+# t = parseLine(data)
+# console.log t
+
+class Trunck 
+
+	constructor: (@body, @tabN = 0) ->
+		@content = []
+		@tabs = ''
+		@tabs += '\t' for i in [0...@tabN]
+
+	addContent: (trunks) ->
+		@content = trunks;
+
+	toString: () ->
+		str = @tabs + '[' + @body + '\n'
+		str += t.toString() for t in @content
+		return str + @tabs + ']\n'
+
+	toCS: () ->
+		str = '\n'
+		if @content.length is 0
+			return str + @body + ';'
+		else
+			str += '\n' + @body + ' {'
+			str += t.toCS() for t in @content
+			str += '\n' + @tabs + '}'
+
+class FunctionTrunck extends Trunck
+
+	constructor: (body, tabN = 0) ->
+		body = body[0...body.length - 1]
+		super(body, tabN)
+
+	toCS: () ->
+		if @content.length is 0
+			return '\n\n' + @body + ' {\n' + @tabs + '}'
+		else
+			super()
+
+class RootTrunck extends Trunck
+
+	constructor: () ->
+		@content = []
+		@tabN = -1
+
+	toString: () ->
+		str = ''
+		str += t.toString() for t in @content
+		return str
+
+	toCS: () ->
+		str = ''
+		str += t.toCS() for t in @content
+		return str
+
+class BlankTrunck
+
+	constructor: () ->
+		@tabN = -1
+
+	toString: () ->
+		return ''
+
+	toCS: () ->
+		return ''
+
+createTrunck = (line, tabN) ->
+	line = line.TrimRight()
+	if line[line.length - 1] is ':'
+		return new FunctionTrunck(line, tabN)
+	else
+		return new Trunck(line, tabN)
+
 parseLine = (src) ->
 	lines = src.replace(/\r\n/g, '\n').split('\n')
 	lines = (t for t in lines when t.Trim() isnt '')
-	createCmd = (n, tab) ->
-		cmd = []
-		while n < lines.length
-			l = lines[n]
-			ctab = countTab(l)
-			if ctab is tab
-				cmd.push(parseOneLine(l))
-				n++
-			else if ctab > tab
-				lc = cmd.pop()
-				[n, tc] = createCmd(n, ctab)
-				cmd.push [lc..., tc...]
-			else
-				return [n, cmd]
-		return [n, cmd]
+	createTrunk = (wait, done) ->
+		if wait.length is 0
+			return done
+		else
+			l = wait.pop()
+			lTabN = countTab(l)
+			trunk0 = createTrunck(l, lTabN)
+			# find subs
+			count = 0
+			for t in done
+				if lTabN < t.tabN
+					count++
+				else
+					break
+			contents = done[0...count]
+			rest = done[count...]
+			trunk0.addContent(contents)
+			return [trunk0, rest...]
+	done = [new BlankTrunck()]
+	for i in [0...lines.length]
+		done = createTrunk(lines, done)
+		# console.log done
+	all = new RootTrunck()
+	all.addContent(done)
+	return all
 
-	[n, cmd] = createCmd(0, 0)
-	console.log n
-	return cmd
 
-parseLine(datat)
-t = parseLine(datat)
-console.log t[1..10]
+root = parseLine(data)
 
+# console.log root.content[2].content[0]
+# console.log root.toString()
+console.log root.toCS()
+
+fs.writeFileSync('aim.cs', root.toCS())

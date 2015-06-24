@@ -1,7 +1,7 @@
 task.todo
 
 1. to simplify the syntax
-	--	to delete the ' ; ' and ' { } '
+	+--	to delete the ' ; ' and ' { } '
 	--	use `abcd to replace "abcd"
 	--	simplify Anonymous objcet
 
