@@ -186,6 +186,6 @@ parseLine = (src) ->
 # 
 
 t = """
-	("sdf\"sdf", "abcdefg, "asdfsdffs, 1234)
+	("sdf'sdf", 'abcdefg, 'asdfsdffs,'1234)
 """
-console.log t.replace(/"(\w+)\s*/g, "\"$1\"")
+console.log t.replace(/\s'(\w+)\s*/g, "\"$1\"")

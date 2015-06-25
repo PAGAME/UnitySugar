@@ -297,8 +297,6 @@ catch (err) {
 
 
 
-
-
 var data = fs.readFileSync('source.ls').toString()
 
 var t = _LS.syntaxTree(data);
