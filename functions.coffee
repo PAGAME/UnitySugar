@@ -13,7 +13,7 @@ data = data.replace(/\r\n/g, '\n')
 # console.log data.indexOf('(', 19)
 # data = fs.readFileSync('out.json').toString()
 # data = fs.readFileSync('csonData.cson').toString()
-# 
+#
 # CSON = require('season')
 # console.log JSON.parse(data)
 # console.log CSON.parse(data)
@@ -34,7 +34,7 @@ atom = (s) ->
  * @return {array}     the tree
 ###
 parseStp = (src) ->
-  	# parseStp tree " , ( ) " 
+  	# parseStp tree " , ( ) "
 	tokens = src.replace(/\(/g, ' ( ')
 		.replace(/\)/g, ' ) ')
 		.replace(/,/g, ' , ')
@@ -78,7 +78,7 @@ parseOneLine = (line) ->
 # t = parseLine(data)
 # console.log t
 
-class Trunck 
+class Trunck
 
 	constructor: (@body, @tabN = 0) ->
 		@content = []
@@ -178,14 +178,8 @@ parseLine = (src) ->
 	return all
 
 
-# root = parseLine(data)
+root = parseLine(data)
 
-# console.log root.toCS()
+console.log root.toCS()
 
 # fs.writeFileSync('aim.cs', root.toCS())
-# 
-
-t = """
-	("sdf'sdf", 'abcdefg, 'asdfsdffs,'1234)
-"""
-console.log t.replace(/\s'(\w+)\s*/g, "\"$1\"")

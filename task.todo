@@ -4,5 +4,8 @@ task.todo
 	+--	to delete the ' ; ' and ' { } '
 	--	use `abcd to replace "abcd"
 	--	simplify Anonymous objcet
+	--	use string[n..m] to instead string.substring(n, m)
+		[n...m] => .substring(n, m - 1)
+		[n..m] => .substring(n, m)
 
 2. to create macro in EditTime

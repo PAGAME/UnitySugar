@@ -131,7 +131,7 @@ _LS.macroExpand = function(tree) {
                 ret.push(replaceCode(source[i]));
             } else {
                 if (replacements[source[i]]) {
-                    if (source[i] == "~rest...") { 
+                    if (source[i] == "~rest...") {
                         ret = ret.concat(replacements[source[i]]);
                     } else {
                         ret.push(replacements[source[i]]);
@@ -169,7 +169,7 @@ _LS.statementToString = function(tree) {
     // testing for anonymous func called immediately
     if (_LS.isFunction.test(fName)) fName = "(" + fName + ")";
     return fName + "(" + tree.slice(1).join(",") + ")";
-    
+
 };
 
 _LS.statements = function(stmnts, isFunction) {
@@ -216,7 +216,7 @@ _LS.if = function(arr) {
 _LS.handleOperator = function(arr) {
     if (arr.length != 3)  throw _LS.error(0, arr._line);
     arr = _LS.expandObjects(arr);
-    return "(" + arr[1] + " " + arr[0] + " " + arr[2] + ")";    
+    return "(" + arr[1] + " " + arr[0] + " " + arr[2] + ")";
 };
 
 _LS["+"] = _LS.handleOperator;
