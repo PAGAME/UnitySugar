@@ -23,9 +23,9 @@ atom = (s) ->
 	if s is '('
 		return '['
 	if s is ')'
-  		return '],'
-  	if s is ','
-  		return ''
+		  return '],'
+	  if s is ','
+		  return ''
 	return "\'" + s + "\',"
 ###*
  * parseStp as a tree
@@ -34,7 +34,7 @@ atom = (s) ->
  * @return {array}     the tree
 ###
 parseStp = (src) ->
-  	# parseStp tree " , ( ) "
+	  # parseStp tree " , ( ) "
 	tokens = src.replace(/\(/g, ' ( ')
 		.replace(/\)/g, ' ) ')
 		.replace(/,/g, ' , ')
@@ -177,9 +177,10 @@ parseLine = (src) ->
 	all.addContent(done)
 	return all
 
-
 root = parseLine(data)
 
 console.log root.toCS()
+
+console.log 'abcdef'
 
 # fs.writeFileSync('aim.cs', root.toCS())

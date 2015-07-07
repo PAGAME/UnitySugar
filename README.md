@@ -13,15 +13,32 @@
 但是和我有什么关系呢。╮(￣▽￣")╭ 
 
 ---
-##流程
-```flow
-st=>start: Start
-op1=>operation: 带语法糖编辑
-cond=>condition: 检测宏
-replace=>operation: 替换宏
-e=>end: End
 
-st->op1->cond
-cond(yes)->replace->e
-cond(no)->e
+Find odd, and set color
+```csharp
+for (int i = 0; i < transform.childCount; i += 2) {
+    Transform child = transform.GetChild(i);
+    Renderer r = child.GetComponent<Renderer>();
+    if (r != null) {
+        r.sharedMaterial.color = Color.red;
+    }
+}
+```
+
+use LINQ instead
+```csharp
+Enumerable
+    .Range(0, transform.childCount)
+    .Where(n => n % 2 == 0)
+    .Select(n => transform.GetChild(n).GetComponent<Renderer>())
+    .OfType<Renderer>()
+    .Select(r => r.sharedMaterial.color = Color.red);
+```
+
+use UnityQuery instaed
+```csharp
+UQ(transform)
+    .Children()
+    .Even()
+    .ForEach<Renderer>(r => r.sharedMaterial.color = Color.red);
 ```

@@ -221,3 +221,14 @@ var variable = /[&']?[.a-z-]+/; //字符变量名，
 // var s = "asdf  \\\n \\\nsdfdf";
 // console.log(s.replace(/([^\\])\n/, '$1 ').replace(/\s+\\\n/, "\\n"))
 
+var s = new Array();
+s.push('<1 abcdef2 : dsafdsfeee: dfdsfdas');
+s.push('>2 某某某:safsd上的发生');
+s.push('>2 mmm.....:sdf');
+
+for (var i = s.length - 1; i >= 0; i--) {
+	t = s[i];
+	d = t.match(/:.*/);
+	console.log(d.toString());
+};
+
