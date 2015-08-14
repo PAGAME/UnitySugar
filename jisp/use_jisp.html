@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>use jisp</title>
+	<script src="jisp.js"></script>
+	<script type="text/jisp">
+	(console.log 'run jisp')
+	(+ 1 2)
+	(alert 'run jisp')
+	(def fact x
+		(if (is x 0) 1
+			(* x (fact (- x 1)))))
+	(alert (fact 5))
+	(= window.fact fact)
+	</script>
+</head>
+<body>
+	<label>ttt</label>
+</body>
+</html>

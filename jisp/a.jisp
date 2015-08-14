@@ -1,0 +1,37 @@
+
+(+ 1 2)
+(console.log `asdfds)
+(console.log `dsf)
+(prn 'fire in the house')
+;//array
+`()
+`(1 2 NaN undefined null)
+
+;//object
+(:)
+(= x `(1 2 3 4))
+(prn x)
+
+((fn (do
+       (= arg (Array.prototype.slice.call arguments 0))
+       (prn `asdf)
+       (prn 'asdf')
+       (prn arg)
+      (return 0))) 2 3)
+
+(def foo ...args
+	(prn ...args))
+(foo 8 9 10)
+
+((fn ...args (prn ...args)) 9 8 7 6)
+
+(myMacro 1 2)
+
+(mac myMacro ...args
+	`(prn ,...(for v args `(+ 1 ,v))))
+
+(myMacro 1 2 3)
+
+(mac myMacro0 ...args
+	`(foo ,...args))
+(myMacro0 1 2 3)

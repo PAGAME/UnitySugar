@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["a.ls"],"sourcesContent":["(var a 1 b 2)\r\n(each [1, 2, 3]\r\n  (function (elem index list)\r\n    (console.log elem)))\r\n"],"file":"a.js","sourceRoot":"/source/"}
